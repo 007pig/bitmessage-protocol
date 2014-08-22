@@ -1,0 +1,23 @@
+{
+  "name": "bitmessage-protocol",
+  "version": "0.0.1",
+  "description": "Bitmessage protocol implemented in Node.js",
+  "main": "bitmessage-protocol.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/007pig/bitmessage-protocol.git"
+  },
+  "keywords": [
+    "bitmessage",
+    "protocol"
+  ],
+  "author": "Xiaoyu Huang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/007pig/bitmessage-protocol/issues"
+  },
+  "homepage": "https://github.com/007pig/bitmessage-protocol"
+}
