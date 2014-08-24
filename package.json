@@ -19,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/007pig/bitmessage-protocol/issues"
   },
-  "homepage": "https://github.com/007pig/bitmessage-protocol"
+  "homepage": "https://github.com/007pig/bitmessage-protocol",
+  "dependencies": {
+    "bitcore": "^0.1.35",
+    "smart-buffer": "^1.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "should": "^4.0.4"
+  }
 }
