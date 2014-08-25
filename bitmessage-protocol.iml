@@ -6,6 +6,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bitmessage-protocol node_modules" level="project" />
+    <orderEntry type="library" name="Node.js v0.10.31 Core Modules" level="application" />
   </component>
 </module>
 
