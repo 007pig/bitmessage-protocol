@@ -22,6 +22,7 @@
   "homepage": "https://github.com/007pig/bitmessage-protocol",
   "dependencies": {
     "bitcore": "^0.1.35",
+    "debug": "^2.0.0",
     "smart-buffer": "^1.0.1"
   },
   "devDependencies": {
