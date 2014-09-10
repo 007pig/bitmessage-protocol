@@ -18,13 +18,15 @@ function BMProtocol() {
 	this._parserSize = MESSAGE_HEADER_SIZE;
 
 	this._headerparsed = false;
+
+	this._connectionIsOrWasFullyEstablished = false;
 }
 
 BMProtocol.prototype._write = function(data, encoding, callback) {
 	this._bufferSize += data.length;
 	this._buffer.push(data);
 
-	var command, payloadlength = 0, checksum = '', buffer, payload;
+	var command = '', payloadlength = 0, checksum = '', buffer, payload;
 	// Try to get header from data
 	while (this._bufferSize >= this._parserSize) {
 		buffer = (this._buffer.length === 1)
@@ -70,7 +72,14 @@ BMProtocol.prototype._write = function(data, encoding, callback) {
 				debug('Bad checksum. Expected: %s, Actual: %s', checksum, require('crypto').createHash('sha512').update(payload).digest().slice(0, 4));
 			}
 			else {
-
+				if (!this._connectionIsOrWasFullyEstablished) {
+					if (['version', 'verack'].indexOf(command) != -1) {
+						this['_oncmd_' + command](payload);
+					}
+				}
+				else {
+					this['_oncmd_' + command](payload);
+				}
 			}
 
 			// Remove payload data from _buffer
@@ -96,6 +105,14 @@ BMProtocol.prototype._read = function() {
 
 };
 
-BMProtocol.prototype._parse = function(command, payload) {
+// ######################
+// Command processor
+// ######################
 
+BMProtocol.prototype._oncmd_version = function(payload) {
+	console.log(payload);
+};
+
+BMProtocol.prototype._oncmd_verack = function(payload) {
+	console.log(payload);
 };
