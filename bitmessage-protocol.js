@@ -116,3 +116,44 @@ BMProtocol.prototype._oncmd_version = function(payload) {
 BMProtocol.prototype._oncmd_verack = function(payload) {
 	console.log(payload);
 };
+
+// ######################
+// Command
+// ######################
+
+BMProtocol.prototype.sendVersion = function(remoteHost, remotePort, myStreamNumber) {
+	var payload = new SmartBuffer();
+
+	payload.writeInt32BE(3); // version
+	payload.writeUint64(3); // version
+};
+
+// ######################
+// Helper methods
+// ######################
+
+BMProtocol.prototype._createPacket = function(command, payload) {
+	var payload_length = payload.length, checksum, packet;
+
+	if (payload.length == 0) {
+		checksum = new Buffer('CF83E135', 'hex');
+	}
+	else {
+		checksum = require('crypto').createHash('sha512').update(payload).digest().slice(0, 4)
+	}
+
+	var commandpad = new Buffer(12 - command.size).fill(0);
+	packet = new SmartBuffer();
+	packet.writeUInt32BE(0xE9BEB4D9); // magic
+	packet.writeString(command); // command
+	packet.writeBuffer(commandpad); // command pad
+	packet.writeUInt32BE(payload_length); // payload length
+	packet.writeBuffer(checksum); // checksum
+	packet.writeBuffer(payload); // payload
+
+	return packet.toBuffer();
+};
+
+BMProtocol.prototype._sendPacket = function(command, payload) {
+	this.push(this._createPacket(command, payload));
+};
