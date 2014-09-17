@@ -2,6 +2,7 @@ var util = require("util");
 var stream = require('stream');
 var SmartBuffer = require('smart-buffer');
 var buffertools = require('buffertools');
+var bignum = require('bignum');
 var debug = require('debug')('protocol');
 
 var MESSAGE_HEADER_SIZE = 24;
@@ -125,7 +126,8 @@ BMProtocol.prototype.sendVersion = function(remoteHost, remotePort, myStreamNumb
 	var payload = new SmartBuffer();
 
 	payload.writeInt32BE(3); // version
-	payload.writeUint64(3); // version
+	payload.writeBuffer(bignum(3).toBuffer({size: 8}));
+
 };
 
 // ######################
