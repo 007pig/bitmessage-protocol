@@ -24,7 +24,9 @@
     "bignum": "^0.9.0",
     "bitcore": "^0.1.35",
     "buffertools": "^2.1.2",
+    "bytebuffer": "^3.3.0",
     "debug": "^2.0.0",
+    "long": "^2.1.0",
     "smart-buffer": "^1.0.1"
   },
   "devDependencies": {

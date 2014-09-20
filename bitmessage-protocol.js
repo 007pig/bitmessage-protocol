@@ -127,6 +127,7 @@ BMProtocol.prototype.sendVersion = function(remoteHost, remotePort, myStreamNumb
 
 	payload.writeInt32BE(3); // version
 	payload.writeBuffer(bignum(3).toBuffer({size: 8}));
+	payload.writeBuffer(bignum(3).toBuffer({size: 8}));
 
 };
 
